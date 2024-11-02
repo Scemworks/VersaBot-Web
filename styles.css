@@ -93,13 +93,3 @@ footer {
     border-radius: 8px; /* Rounded corners */
     margin-top: auto; /* Push footer to the bottom */
 }
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .card {
-        width: 90%; /* Full width on smaller screens */
-    }
-    .container {
-        flex-direction: column; /* Stack cards vertically on smaller screens */
-    }
-}
