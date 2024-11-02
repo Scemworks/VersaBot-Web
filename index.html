@@ -3,81 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>VersaBot Documentation</title>
+    <title>VersaBot - Discord Bot</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="src/logo.jpeg">
 </head>
 <body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="src/logo.jpeg" alt="A sleek and modern logo for VersaBot featuring geometric shapes" height="40" style="display: block;">
+                <h1>VersaBot</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#commands">Commands</a>
+                <a href="#setup">Setup Guide</a>
+                <a href="https://github.com/Scemworks/VersaBot" target="_blank">GitHub</a>
+                <button id="theme-toggle" aria-label="Toggle dark mode" onclick="setDarkMode(false)">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div class="hero">
+            <img src="src/banner.jpg" alt="A dynamic banner showcasing VersaBot's interface and features" class="hero-banner" style="display: block; width: 100%; max-width: 800px; height: auto; margin: 0 auto;">
+            <h2>Multi-Command Discord Bot</h2>
+            <p>Streamline your Discord server with our versatile multi-command utility suite</p>
+            <a href="#setup" class="cta-button">Get Started</a>
+        </div>
+    </header>
 
-<header>
-    <h1>Welcome to VersaBot</h1>
-    <p>Your friendly Discord bot built with Python!</p>
-</header>
+    <main>
+        <section id="commands" class="commands-section">
+            <h2>Available Commands</h2>
+            <p class="section-description">Explore our comprehensive set of utility commands</p>
+            <div class="flashcard-container">
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">⚡</div>
+                            <h3>/ping</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>Latency Check</h4>
+                            <p>Monitor bot responsiveness and connection status</p>
+                            <span class="usage">Usage: /ping</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="container">
-    <h2>Commands</h2>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/ping</h3>
-        <p class="description">Ping and get latency of the bot.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/dice</h3>
-        <p class="description">Rolls a dice and shows the result.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/flip</h3>
-        <p class="description">Flips a coin and shows Heads or Tails.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/qr</h3>
-        <p class="description">Generates a QR Code from a given link/text.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/fortune</h3>
-        <p class="description">Get a random fortune.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/tarot</h3>
-        <p class="description">Draw a tarot card with an emoji!</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>/help</h3>
-        <p class="description">Get help with the bot and see available commands.</p>
-    </div>
-</div>
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">📱</div>
+                            <h3>/qr</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>QR Generator</h4>
+                            <p>Create custom QR codes with optional logo and color customization</p>
+                            <span class="usage">Usage: /qr [link] [options]</span>
+                        </div>
+                    </div>
+                </div>
 
-<!-- Updated "How to Run the Bot" section -->
-<div class="container">
-    <h2>How to Run the Bot</h2>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 1</h3>
-        <p class="description">Clone the repository from GitHub: <br><code>git clone https://github.com/Scemworks/VersaBot.git</code></p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 2</h3>
-        <p class="description">Change to the directory: <code>cd VersaBot</code></p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 3</h3>
-        <p class="description">Install the required packages: <code>pip install -r requirements.txt</code></p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 4</h3>
-        <p class="description">Set up your Discord bot and get the token.</p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 5</h3>
-        <p class="description">Create a .env file with your token: <code>TOKEN=your_token_here</code></p>
-    </div>
-    <div class="card" onclick="toggleCard(this)">
-        <h3>Step 6</h3>
-        <p class="description">Run the bot with: <code>python your_bot_file.py</code></p>
-    </div>
-</div>
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">🎲</div>
+                            <h3>/dice</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>Dice Roll</h4>
+                            <p>Generate random numbers with virtual dice</p>
+                            <span class="usage">Usage: /dice</span>
+                        </div>
+                    </div>
+                </div>
 
-<footer>
-    <p>Developed with ❣️ by TechnoMinds for Useless Projects '24</p>
-</footer>
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">🪙</div>
+                            <h3>/flip</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>Coin Flip</h4>
+                            <p>Make quick decisions with a virtual coin toss</p>
+                            <span class="usage">Usage: /flip</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">🔮</div>
+                            <h3>/fortune</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>Fortune Teller</h4>
+                            <p>Receive mystical predictions and fortunes</p>
+                            <span class="usage">Usage: /fortune</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard professional">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="command-icon">🎴</div>
+                            <h3>/tarot</h3>
+                        </div>
+                        <div class="flashcard-back">
+                            <h4>Tarot Reading</h4>
+                            <p>Draw virtual tarot cards for spiritual guidance</p>
+                            <span class="usage">Usage: /tarot</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="setup" class="setup-section">
+            <h2>Quick Setup Guide</h2>
+            <p class="section-description">Get VersaBot up and running in minutes</p>
+            <div class="setup-container">
+                <div class="setup-card">
+                    <div class="step-number">1</div>
+                    <h3>Clone Repository</h3>
+                    <div class="code-block">
+                        <code>git clone https://github.com/Scemworks/VersaBot.git</code>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <div class="setup-card">
+                    <div class="step-number">2</div>
+                    <h3>Navigate to Directory</h3>
+                    <div class="code-block">
+                        <code>cd VersaBot</code>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <div class="setup-card">
+                    <div class="step-number">3</div>
+                    <h3>Install Dependencies</h3>
+                    <div class="code-block">
+                        <code>pip install -r requirements.txt</code>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <div class="setup-card">
+                    <div class="step-number">4</div>
+                    <h3>Configure Bot Token</h3>
+                    <div class="code-block">
+                        <code>TOKEN="DISCORD_BOT_TOKEN"</code>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+
+                <div class="setup-card">
+                    <div class="step-number">5</div>
+                    <h3>Launch Bot</h3>
+                    <div class="code-block">
+                        <code>python main.py</code>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>VersaBot</h3>
+                <p>Created with ❣️ by team TechnoMinds</p>
+                <p>Useless Projects '24</p>
+            </div>
+            <div class="footer-links">
+                <a href="#commands">Commands</a>
+                <a href="#setup">Setup</a>
+                <a href="https://github.com/Scemworks/VersaBot">GitHub</a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
