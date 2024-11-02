@@ -5,7 +5,7 @@ html, body {
     font-family: 'Arial', sans-serif;
     background-color: #AAB7B6; /* Soft gray background */
     color: #333; /* Darker text for better readability */
-    overflow: hidden; /* Prevent scrollbars */
+    overflow: auto; /* Allow scrollbars */
 }
 
 /* Header Styles */
