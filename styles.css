@@ -1,0 +1,107 @@
+/* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Stack header, content, and footer vertically */
+    font-family: 'Arial', sans-serif;
+    background-color: #AAB7B6; /* Soft gray background */
+    color: #333; /* Darker text for better readability */
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #33E1F6; /* Bright cyan header */
+    color: white;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    animation: fadeIn 1s; /* Fade-in animation */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Container Styles */
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of cards */
+    justify-content: center; /* Center the cards */
+    margin: 20px 0; /* Vertical margin for spacing */
+    flex: 1; /* Allow the container to grow and take available space */
+    animation: slideIn 1s; /* Slide-in animation */
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Card Styles */
+.card {
+    background-color: white; /* Card background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 15px; /* Margin around each card */
+    padding: 20px; /* Padding inside the card */
+    width: 300px; /* Fixed width for cards */
+    text-align: center; /* Center text inside cards */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+    position: relative; /* For absolute positioning of the description */
+    overflow: hidden; /* Hide overflow for animations */
+}
+
+/* Card Title Styles */
+.card h3 {
+    margin: 0 0 10px; /* Margin below the title */
+    font-size: 1.5em; /* Font size for the title */
+    color: #33E1F6; /* Bright cyan color for titles */
+}
+
+/* Card Description Styles */
+.card p {
+    font-size: 14px; /* Font size for the description */
+    color: #555; /* Darker gray color for description text */
+    display: none; /* Initially hide the description */
+    opacity: 0; /* Start with opacity 0 for fade-in effect */
+    transition: opacity 0.5s ease; /* Smooth opacity transition */
+}
+
+/* Card Hover Effect */
+.card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+}
+
+/* Show description when active */
+.card.active p {
+    display: block; /* Show description */
+    opacity: 1; /* Fade in the description */
+}
+
+/* Footer Styles */
+footer {
+    text-align: center; /* Center text in footer */
+    padding: 10px; /* Padding inside footer */
+    background-color: #33E1F6; /* Bright cyan footer */
+    color: white; /* White text color */
+    border-radius: 8px; /* Rounded corners */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .card {
+        width: 90%; /* Full width on smaller screens */
+    }
+}
