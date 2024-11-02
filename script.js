@@ -9,15 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const moonIcon = document.querySelector('.moon-icon');
     
     const setDarkMode = (isDark) => {
-        if (isDark) {
-            document.documentElement.classList.add('dark-mode');
-            sunIcon.style.display = 'none';
-            moonIcon.style.display = 'block';
-        } else {
-            document.documentElement.classList.remove('dark-mode');
-            sunIcon.style.display = 'block';
-            moonIcon.style.display = 'none';
-        }
+        requestAnimationFrame(() => {
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        });
     };
 
     // Check system dark mode preference initially
@@ -27,11 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Toggle dark mode on button click, overriding system preference
+    let isThemeToggling = false;
     themeToggle.addEventListener('click', () => {
+        if (isThemeToggling) return;
+        isThemeToggling = true;
+        
         const isDarkMode = document.documentElement.classList.contains('dark-mode');
         setDarkMode(!isDarkMode);
         // Remove system preference listener when manually toggled
         systemDarkMode.removeEventListener('change', systemDarkModeHandler);
+        
+        setTimeout(() => {
+            isThemeToggling = false;
+        }, 200); // Debounce for 200ms
     });
 
     // System dark mode change handler
