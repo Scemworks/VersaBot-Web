@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 sunIcon.style.display = 'none';
                 moonIcon.style.display = 'block';
             } else {
-                document.documentElement.classList.remove('dark-mode');
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
+                document.documentElement.classList.add('dark-mode'); // Changed to always stay in dark mode
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
             }
         });
     };
@@ -34,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isThemeToggling) return;
         isThemeToggling = true;
         
-        const isDarkMode = document.documentElement.classList.contains('dark-mode');
-        setDarkMode(!isDarkMode);
+        setDarkMode(true); // Always set to dark mode
         // Remove system preference listener when manually toggled
         systemDarkMode.removeEventListener('change', systemDarkModeHandler);
         
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // System dark mode change handler
     const systemDarkModeHandler = (e) => {
-        setDarkMode(e.matches);
+        setDarkMode(true); // Always set to dark mode
     };
     systemDarkMode.addEventListener('change', systemDarkModeHandler);
     

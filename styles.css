@@ -1,12 +1,11 @@
-/* General Styles */
 :root {
-    --bg-color: #f5f7fa;
-    --text-color: #2d3436;
-    --card-bg: #ffffff;
-    --code-bg: #f5f7fa;
-    --shadow-color: rgba(0,0,0,0.1);
-    --gradient-start: #7289DA;
-    --gradient-end: #5865F2;
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff; 
+    --card-bg: #2d2d2d;
+    --code-bg: #363636;
+    --shadow-color: rgba(0,0,0,0.3);
+    --gradient-start: #5865F2;
+    --gradient-end: #404EED;
 }
 
 :root.dark-mode {
