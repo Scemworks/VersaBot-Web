@@ -1,6 +1,6 @@
 # VersaBot Website
 
-A modern website for VersaBot - a versatile multi-command Discord bot.
+A modern website for VersaBot - a versatile multi-command Discord bot. Developed with help from [![Cursor](https://img.shields.io/badge/Cursor-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.sh).
 
 ## 🔗 Links
 - [![GitHub](https://img.shields.io/badge/GitHub-Bot%20Source-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Scemworks/VersaBot)
