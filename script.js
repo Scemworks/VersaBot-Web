@@ -88,27 +88,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Mobile menu handling
+    let hamburger = null;
     const setupMobileMenu = () => {
         const nav = document.querySelector('nav');
         const navLinks = document.querySelector('.nav-links');
-        const hamburger = document.createElement('button');
-        hamburger.className = 'hamburger';
-        hamburger.innerHTML = '☰';
+        
+        // Remove existing hamburger if it exists
+        if (hamburger && nav.contains(hamburger)) {
+            nav.removeChild(hamburger);
+        }
         
         if (window.innerWidth <= 768) {
-            if (!nav.contains(hamburger)) {
-                nav.appendChild(hamburger);
+            // Create new hamburger only if it doesn't exist
+            if (!hamburger) {
+                hamburger = document.createElement('button');
+                hamburger.className = 'hamburger';
+                hamburger.innerHTML = '☰';
+                
+                hamburger.addEventListener('click', () => {
+                    navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+                });
             }
-            navLinks.style.display = 'none';
             
-            hamburger.addEventListener('click', () => {
-                navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
-            });
+            nav.appendChild(hamburger);
+            navLinks.style.display = 'none';
         } else {
             navLinks.style.display = 'flex';
-            if (nav.contains(hamburger)) {
-                nav.removeChild(hamburger);
-            }
+            hamburger = null;
         }
     };
 
@@ -147,6 +153,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         });
     });
+
+    // Handle code blocks for mobile responsiveness
+    const codeBlocks = document.querySelectorAll('pre code');
+    const adjustCodeBlocks = () => {
+        codeBlocks.forEach(block => {
+            if (window.innerWidth <= 768) {
+                block.style.whiteSpace = 'pre-wrap';
+                block.style.wordBreak = 'break-word';
+                block.style.overflowX = 'hidden';
+                block.parentElement.style.maxWidth = '100%';
+                block.parentElement.style.width = '100%';
+            } else {
+                block.style.whiteSpace = 'pre';
+                block.style.wordBreak = 'normal';
+                block.style.overflowX = 'auto';
+            }
+        });
+    };
+
+    // Initial setup and resize handling for code blocks
+    adjustCodeBlocks();
+    window.addEventListener('resize', adjustCodeBlocks);
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -191,5 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize mobile menu and handle resize
     setupMobileMenu();
-    window.addEventListener('resize', setupMobileMenu);
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(setupMobileMenu, 100);
+    });
 });

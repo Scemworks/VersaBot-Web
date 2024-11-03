@@ -300,12 +300,14 @@ nav {
     margin-top: 1rem;
     font-family: monospace;
     font-size: 0.9rem;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 .code-block code {
     display: block;
-    white-space: pre;
-    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     color: var(--text-color);
 }
 
@@ -398,6 +400,15 @@ footer {
         gap: 2rem;
         text-align: center;
     }
+
+    .code-block {
+        padding-right: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .code-block code {
+        padding-right: 3rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -420,5 +431,9 @@ footer {
     
     .setup-card {
         padding: 1.5rem;
+    }
+
+    .code-block {
+        font-size: 0.75rem;
     }
 }
