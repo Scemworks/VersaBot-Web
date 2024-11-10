@@ -14,18 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.classList.add('dark-mode');
                 sunIcon.style.display = 'none';
                 moonIcon.style.display = 'block';
+                localStorage.setItem('theme', 'dark');
             } else {
                 document.documentElement.classList.remove('dark-mode');
                 sunIcon.style.display = 'block';
                 moonIcon.style.display = 'none';
+                localStorage.setItem('theme', 'light');
             }
         });
     };
 
-    // Check system dark mode preference initially
-    const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
-    if (systemDarkMode.matches) {
-        setDarkMode(true);
+    // Check stored theme preference first
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+        setDarkMode(storedTheme === 'dark');
+    } else {
+        // Check system dark mode preference if no stored preference
+        const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+        if (systemDarkMode.matches) {
+            setDarkMode(true);
+        }
     }
 
     // Toggle dark mode on button click, overriding system preference
@@ -46,8 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // System dark mode change handler
+    const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
     const systemDarkModeHandler = (e) => {
-        setDarkMode(e.matches);
+        // Only apply system preference if no stored theme
+        if (!localStorage.getItem('theme')) {
+            setDarkMode(e.matches);
+        }
     };
     systemDarkMode.addEventListener('change', systemDarkModeHandler);
     

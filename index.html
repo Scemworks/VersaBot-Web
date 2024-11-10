@@ -3,24 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VersaBot - Discord Bot</title>
+    <meta name="description" content="VersaBot - A versatile Discord bot with multiple utility commands">
+    <meta name="keywords" content="Discord bot, utility bot, VersaBot, commands">
+    <title>VersaBot - Multi-Command Discord Bot</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="src/logo.jpeg">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="navbar">
             <div class="logo">
-                <img src="src/logo.jpeg" alt="A sleek and modern logo for VersaBot featuring geometric shapes" height="40" style="display: block;">
+                <img src="src/logo.jpeg" alt="VersaBot Logo" width="40" height="40" loading="lazy">
                 <h1>VersaBot</h1>
             </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="nav-links">
-                <a href="#commands">Commands</a>
-                <a href="#setup">Setup Guide</a>
-                <a href="https://github.com/Scemworks/VersaBot" target="_blank">GitHub</a>
-                <button id="theme-toggle" aria-label="Toggle dark mode">
-                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <a href="#commands" class="nav-link">Commands</a>
+                <a href="#setup" class="nav-link">Setup Guide</a>
+                <a href="https://github.com/Scemworks/VersaBot" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <circle cx="12" cy="12" r="5"/>
                         <line x1="12" y1="1" x2="12" y2="3"/>
                         <line x1="12" y1="21" x2="12" y2="23"/>
@@ -31,17 +40,22 @@
                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                     </svg>
-                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                     </svg>
                 </button>
             </div>
         </nav>
         <div class="hero">
-            <img src="src/banner.jpg" alt="A dynamic banner showcasing VersaBot's interface and features" class="hero-banner" style="display: block; width: 100%; max-width: 800px; height: auto; margin: 0 auto;">
-            <h2>Multi-Command Discord Bot</h2>
-            <p>Streamline your Discord server with our versatile multi-command utility suite</p>
-            <a href="#setup" class="cta-button">Get Started</a>
+            <img src="src/banner.jpg" alt="VersaBot Interface Preview" class="hero-banner" width="800" height="400" loading="lazy">
+            <div class="hero-content">
+                <h2>Multi-Command Discord Bot</h2>
+                <p>Enhance your Discord server with powerful utility commands and fun features</p>
+                <div class="cta-buttons">
+                    <a href="#setup" class="cta-button primary">Get Started</a>
+                    <a href="#commands" class="cta-button secondary">View Commands</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -50,10 +64,10 @@
             <h2>Available Commands</h2>
             <p class="section-description">Explore our comprehensive set of utility commands</p>
             <div class="flashcard-container">
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">⚡</div>
+                            <div class="command-icon" aria-hidden="true">⚡</div>
                             <h3>/ping</h3>
                         </div>
                         <div class="flashcard-back">
@@ -64,10 +78,10 @@
                     </div>
                 </div>
 
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">📱</div>
+                            <div class="command-icon" aria-hidden="true">📱</div>
                             <h3>/qr</h3>
                         </div>
                         <div class="flashcard-back">
@@ -78,10 +92,10 @@
                     </div>
                 </div>
 
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">🎲</div>
+                            <div class="command-icon" aria-hidden="true">🎲</div>
                             <h3>/dice</h3>
                         </div>
                         <div class="flashcard-back">
@@ -92,10 +106,10 @@
                     </div>
                 </div>
 
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">🪙</div>
+                            <div class="command-icon" aria-hidden="true">🪙</div>
                             <h3>/flip</h3>
                         </div>
                         <div class="flashcard-back">
@@ -106,10 +120,10 @@
                     </div>
                 </div>
 
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">🔮</div>
+                            <div class="command-icon" aria-hidden="true">🔮</div>
                             <h3>/fortune</h3>
                         </div>
                         <div class="flashcard-back">
@@ -120,10 +134,10 @@
                     </div>
                 </div>
 
-                <div class="flashcard professional">
+                <div class="flashcard professional" tabindex="0">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <div class="command-icon">🎴</div>
+                            <div class="command-icon" aria-hidden="true">🎴</div>
                             <h3>/tarot</h3>
                         </div>
                         <div class="flashcard-back">
@@ -141,47 +155,57 @@
             <p class="section-description">Get VersaBot up and running in minutes</p>
             <div class="setup-container">
                 <div class="setup-card">
-                    <div class="step-number">1</div>
+                    <div class="step-number" aria-label="Step 1">1</div>
                     <h3>Clone Repository</h3>
                     <div class="code-block">
                         <code>git clone https://github.com/Scemworks/VersaBot.git</code>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy command">
+                            <span class="copy-text">Copy</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="setup-card">
-                    <div class="step-number">2</div>
+                    <div class="step-number" aria-label="Step 2">2</div>
                     <h3>Navigate to Directory</h3>
                     <div class="code-block">
                         <code>cd VersaBot</code>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy command">
+                            <span class="copy-text">Copy</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="setup-card">
-                    <div class="step-number">3</div>
+                    <div class="step-number" aria-label="Step 3">3</div>
                     <h3>Install Dependencies</h3>
                     <div class="code-block">
                         <code>pip install -r requirements.txt</code>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy command">
+                            <span class="copy-text">Copy</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="setup-card">
-                    <div class="step-number">4</div>
+                    <div class="step-number" aria-label="Step 4">4</div>
                     <h3>Configure Bot Token</h3>
                     <div class="code-block">
                         <code>TOKEN="DISCORD_BOT_TOKEN"</code>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy command">
+                            <span class="copy-text">Copy</span>
+                        </button>
                     </div>
                 </div>
 
                 <div class="setup-card">
-                    <div class="step-number">5</div>
+                    <div class="step-number" aria-label="Step 5">5</div>
                     <h3>Launch Bot</h3>
                     <div class="code-block">
                         <code>python main.py</code>
-                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <button class="copy-btn" onclick="copyCode(this)" aria-label="Copy command">
+                            <span class="copy-text">Copy</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -192,20 +216,20 @@
         <div class="footer-content">
             <div class="footer-info">
                 <h3>VersaBot</h3>
-                <p>Created with ❣️ by team TechnoMinds</p>
+                <p>Created with <span aria-label="love">❣️</span> by team TechnoMinds</p>
                 <p>
-                    <a href="https://www.tinkerhub.org/events/Q2Q1TQKX6Q/Useless%20Projects" style="text-decoration: none;">
-                        <img src="https://img.shields.io/badge/UselessProject--24-24?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects" alt="Useless Projects '24">
+                    <a href="https://www.tinkerhub.org/events/Q2Q1TQKX6Q/Useless%20Projects" class="badge-link" rel="noopener">
+                        <img src="https://img.shields.io/badge/UselessProject--24-24?link=https%3A%2F%2Fwww.tinkerhub.org%2Fevents%2FQ2Q1TQKX6Q%2FUseless%2520Projects" alt="Useless Projects '24" loading="lazy">
                     </a>
                 </p>
             </div>
-            <div class="footer-links">
+            <nav class="footer-links" aria-label="Footer navigation">
                 <a href="#commands">Commands</a>
                 <a href="#setup">Setup</a>
-                <a href="https://github.com/Scemworks/VersaBot">GitHub</a>
-            </div>
+                <a href="https://github.com/Scemworks/VersaBot" rel="noopener">GitHub</a>
+            </nav>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
