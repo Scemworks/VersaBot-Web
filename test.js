@@ -230,3 +230,8 @@ commandInput.addEventListener('input', showSuggestions);
 
 // Initial Message
 createMessage('Welcome! Type a command like "/help" for options.', true);
+
+// send message on pressing send button(function)
+sendButton.addEventListener('click', () => {
+    executeCommand();
+});
