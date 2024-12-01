@@ -193,19 +193,75 @@ button:hover {
 footer {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     color: white;
-    padding: 3rem 2rem;
-    margin-top: 4rem;
+    padding: 2rem 1rem;
+    margin-top: auto; /* Ensures footer stays at the bottom */
+    display: flex;
+    justify-content: center; /* Center the content */
 }
 
 .footer-content {
     max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
     justify-content: space-between;
     align-items: center;
+    gap: 1rem; /* Space between items */
+    text-align: center; /* Align text for smaller screens */
 }
 
+.footer-info {
+    flex: 1;
+    font-size: 1rem;
+    text-align: center;
+}
 
+.footer-links {
+    display: flex;
+    gap: 1rem; /* Space between links */
+    justify-content: center;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--text-color);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .footer-info {
+        font-size: 0.875rem;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-info {
+        font-size: 0.75rem;
+    }
+
+    .footer-links a {
+        font-size: 0.875rem;
+    }
+}
 
 @media (max-width: 768px) {
     .chat-container {
