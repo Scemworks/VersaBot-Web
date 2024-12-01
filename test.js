@@ -235,3 +235,10 @@ createMessage('Welcome! Type a command like "/help" for options.', true);
 sendButton.addEventListener('click', () => {
     executeCommand();
 });
+
+// send message on pressing enter key(even on mobile)
+commandInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        executeCommand();
+    }
+})
