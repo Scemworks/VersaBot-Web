@@ -189,12 +189,37 @@ button:hover {
     margin-top: 15px;
 }
 
-.footer {
-    background-color: var(--card-bg);
-    padding: 10px;
-    text-align: center;
-    margin-top: auto; /* Pushes footer to the bottom */
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
 }
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
 
 @media (max-width: 768px) {
     .chat-container {
