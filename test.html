@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VersaBot|Simulation</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Chat messages container -->
+        <div class="chat-box" id="messages"></div>
+
+        <!-- Input area for commands -->
+        <div class="input-area">
+            <input type="text" id="commandInput" placeholder="Type a command..." autocomplete="off">
+            <div id="suggestions" class="suggestions"></div>
+            <button id="sendButton">Send</button>
+        </div>
+
+        <!-- QR form container (hidden initially) -->
+        <div id="qrFormDiv" style="display: none;">
+            <h3>Generate QR Code</h3>
+            <form id="qrForm">
+                <label for="qrLink">QR Link:</label>
+                <input type="text" id="qrLink" class="input-field" placeholder="Enter the link/text for QR code" required>
+                
+                <label for="qrLogo">Logo URL (Optional):</label>
+                <input type="text" id="qrLogo" class="input-field" placeholder="Enter logo URL (optional)">
+                
+                <button type="submit">Generate QR Code</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <script src="test.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
