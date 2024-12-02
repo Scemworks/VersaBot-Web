@@ -1,21 +1,23 @@
-// Existing references to the DOM elements
+// DOM References
 const messagesDiv = document.getElementById('messages');
 const commandInput = document.getElementById('commandInput');
 const suggestionsDiv = document.getElementById('suggestions');
 const qrFormDiv = document.getElementById('qrFormDiv');
 const qrForm = document.getElementById('qrForm');
+const qrLink = document.getElementById('qrLink');
+const qrLogo = document.getElementById('qrLogo');
 const sendButton = document.getElementById('sendButton');
 
-// Commands and functions
+// Commands and Descriptions
 const commands = {
     '/ping': 'Pong! Latency: 50ms',
-    '/dice': 'Rolled: ⚁',
-    '/flip': 'Flipped: Heads',
-    '/fortune': 'Finding your fortune...',
-    '/tarot': 'Drawing a tarot card...',
-    '/qr': 'Generating QR Code...',
-    '/help': 'Shows a detailed list of available commands and how to use them',  // Updated help command
-    '/goback': 'Going back to the previous page...'  // New Go Back Command
+    '/dice': 'Rolls a dice and shows a random result',
+    '/flip': 'Flips a coin and shows the result',
+    '/fortune': 'Finds your fortune with humorous messages',
+    '/tarot': 'Draws a tarot card and displays its meaning',
+    '/qr': 'Generates a QR Code with optional logo support',
+    '/help': 'Shows a detailed list of available commands',
+    '/goback': 'Goes back to the previous page'
 };
 
 const commandList = Object.keys(commands);
@@ -29,10 +31,7 @@ function createMessage(content, isBot = true) {
     messagesDiv.appendChild(msgDiv);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-    // Simulate a bot reply after a user message (not a command)
-    if (!isBot) {
-        sendRandomEmojiReply();  // Send only one emoji
-    }
+    if (!isBot) sendRandomEmojiReply(); // Simulate a bot reply for non-commands
 }
 
 // Function to show suggestions
@@ -59,9 +58,8 @@ function executeCommand(command = commandInput.value.trim()) {
 
     createMessage(command, false);
 
-    // Check if the command starts with '/'
     if (command.startsWith('/')) {
-        switch (command) {
+        switch (command.split(' ')[0]) {
             case '/fortune':
                 simulateFortune();
                 break;
@@ -69,7 +67,7 @@ function executeCommand(command = commandInput.value.trim()) {
                 simulateTarot();
                 break;
             case '/qr':
-                displayQrForm();
+                handleQrCommand(command);
                 break;
             case '/flip':
                 flipCoin();
@@ -78,72 +76,79 @@ function executeCommand(command = commandInput.value.trim()) {
                 rollDice();
                 break;
             case '/help':
-                displayHelp();  // Updated help command
+                displayHelp();
                 break;
             case '/ping':
                 createMessage('Pong! Latency: 50ms', true);
                 break;
             case '/goback':
-                goBack();  // Handle Go Back command
+                goBack();
                 break;
             default:
                 createMessage('Unknown command, try again!', true);
         }
     } else {
-        createMessage(storedMessage, true);  // Send stored message for non-command messages
+        createMessage(storedMessage, true); // Send stored message for non-command input
     }
 
     commandInput.value = '';
-    suggestionsDiv.innerHTML = '';  // Clear suggestions
+    suggestionsDiv.innerHTML = '';
 }
 
-// Function to send random emoji reply after a user message
+// Handle `/qr` Command
+function handleQrCommand(command) {
+    const qrArgs = command.split(' ').slice(1).join(' ');
+    if (qrArgs) {
+        qrLink.value = qrArgs; // Set input field value to the argument
+        generateQrCode();
+    } else {
+        displayQrForm();
+    }
+}
+
+// Random emoji reply after user input
+let storedMessage = '';
 function sendRandomEmojiReply() {
     const emojiList = ["🤔", "😕", "🙄", "🤨", "🤷", "😊", "👍", "👎", "👌", "👏", "🙏", "🤝"];
     const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
     storedMessage = randomEmoji;
 }
 
-// Function to display the updated help message
+// Display the help message
 function displayHelp() {
     const helpMessage = `
-    Help: Available Commands
-    • /help     Shows this message with a list of available commands
-    • /ping     Checks bot's responsiveness (e.g. "Pong! Latency: 50ms")
-    • /dice     Rolls a dice and shows a random result (e.g. ⚀)
-    • /flip     Flips a coin and shows the result (e.g. Heads or Tails)
-    • /fortune  Get a random fortune with humorous or witty messages
-    • /tarot    Draw a tarot card and display its meaning with an emoji
-    • /qr       Generates a QR Code from a link or text (with optional support for a logo)
-    • /goback   Goes back to the previous page (./index.html)
+Help: Available Commands
+• /help     Shows this message
+• /ping     Checks bot's responsiveness
+• /dice     Rolls a dice (e.g., ⚀ to ⚅)
+• /flip     Flips a coin (e.g., Heads or Tails)
+• /fortune  Shows a humorous fortune
+• /tarot    Draws a tarot card
+• /qr       Generates a QR Code
+• /goback   Goes back to the previous page
     `;
-    
     createMessage(helpMessage, true);
 }
 
-// Function to roll a dice
+// Roll a dice
 async function rollDice() {
     const dice = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
     createMessage('Rolling the dice...', true);
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    const result = dice[Math.floor(Math.random() * dice.length)];
-    createMessage(`Rolled dice: ${result}`, true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    createMessage(`Rolled: ${dice[Math.floor(Math.random() * dice.length)]}`, true);
 }
 
-// Function to flip a coin
+// Flip a coin
 async function flipCoin() {
     const coin = ['Heads', 'Tails'];
     createMessage('Flipping the coin...', true);
 
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    const result = coin[Math.floor(Math.random() * coin.length)];
-    createMessage(`Flipped to ${result}`, true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    createMessage(`Result: ${coin[Math.floor(Math.random() * coin.length)]}`, true);
 }
 
-// Function to simulate fortune
+// Simulate a fortune
 async function simulateFortune() {
     const fortunes = [
         "What is the meaning of your life? Your life is very mean.",
@@ -173,15 +178,13 @@ async function simulateFortune() {
     ];
 
     createMessage('Finding your fortune...', true);
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    const fortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    createMessage(fortune, true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    createMessage(fortunes[Math.floor(Math.random() * fortunes.length)], true);
 }
 
-// Function to simulate tarot card draw
+// Simulate a tarot card draw
 async function simulateTarot() {
-    const tarotCards = [
+        const tarotCards = [
         {"name": "The Fool", "emoji": "🤹"},
         {"name": "The Magician", "emoji": "🧙"},
         {"name": "The High Priestess", "emoji": "👸"},
@@ -206,82 +209,58 @@ async function simulateTarot() {
         {"name": "The World", "emoji": "🌎"},
         {"name": "Error 404: Card Not Found", "emoji": "❓"}
     ];
-
     createMessage('Drawing a tarot card...', true);
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    const tarotCard = tarotCards[Math.floor(Math.random() * tarotCards.length)];
-    createMessage(`${tarotCard.name} ${tarotCard.emoji}`, true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    const card = tarotCards[Math.floor(Math.random() * tarotCards.length)];
+    createMessage(`${card.name} ${card.emoji}`, true);
 }
 
-// Function to go back to the previous page
-function goBack() {
-    window.location.href = './index.html';
-}
-
-// Function to display QR form
+// Display the QR form
 function displayQrForm() {
     qrFormDiv.style.display = 'block';
     qrForm.focus();
 }
 
-// Function to generate a QR code
+// Generate a QR code
 function generateQrCode() {
-    const qrCanvas = document.createElement('canvas'); // Canvas for QR Code
-    const qrValue = qrLink.value.trim(); // Get the text or link from the input field
-    const logoUrl = qrLogo.value.trim(); // Get the logo URL from the input field
+    const qrCanvas = document.createElement('canvas');
+    const qrValue = qrLink.value.trim();
+    const logoUrl = qrLogo.value.trim();
 
     if (!qrValue) {
-        createMessage('Please provide a valid link or text for QR code.', true);
+        createMessage('Please provide valid text or a link.', true);
         return;
     }
 
-    // Use qrcode.js to generate the QR code
-    QRCode.toCanvas(qrCanvas, qrValue, { width: 300, margin: 1 }, async (error) => {
+    QRCode.toCanvas(qrCanvas, qrValue, { width: 300, margin: 1 }, (error) => {
         if (error) {
-            createMessage('Error generating QR code. Please try again.', true);
-            console.error(error);
+            createMessage('Error generating QR code.', true);
             return;
         }
 
         if (logoUrl) {
-            try {
-                // Add the logo to the QR code
-                const ctx = qrCanvas.getContext('2d');
-                const logoImg = new Image();
+            const ctx = qrCanvas.getContext('2d');
+            const logoImg = new Image();
 
-                logoImg.onload = () => {
-                    const logoSize = qrCanvas.width * 0.2; // 20% of QR code size
-                    const logoX = (qrCanvas.width - logoSize) / 2; // Center horizontally
-                    const logoY = (qrCanvas.height - logoSize) / 2; // Center vertically
-
-                    ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
-
-                    // Display the QR code with logo
-                    displayQrCanvas(qrCanvas);
-                };
-
-                logoImg.onerror = () => {
-                    createMessage('Error loading logo image. Displaying QR code without logo.', true);
-                    displayQrCanvas(qrCanvas);
-                };
-
-                logoImg.src = logoUrl;
-            } catch (logoError) {
-                createMessage('Error adding logo to QR code.', true);
-                console.error(logoError);
+            logoImg.onload = () => {
+                const logoSize = qrCanvas.width * 0.2;
+                const x = (qrCanvas.width - logoSize) / 2;
+                const y = (qrCanvas.height - logoSize) / 2;
+                ctx.drawImage(logoImg, x, y, logoSize, logoSize);
                 displayQrCanvas(qrCanvas);
-            }
+            };
+
+            logoImg.onerror = () => displayQrCanvas(qrCanvas);
+            logoImg.src = logoUrl;
         } else {
-            // Display QR code without logo
             displayQrCanvas(qrCanvas);
         }
     });
 }
 
-// Helper function to display the QR code
+// Display QR code
 function displayQrCanvas(canvas) {
-    qrFormDiv.style.display = 'none'; // Hide QR form
+    qrFormDiv.style.display = 'none';
     const qrOutput = document.createElement('div');
     qrOutput.classList.add('qr-output');
     qrOutput.appendChild(canvas);
@@ -289,26 +268,21 @@ function displayQrCanvas(canvas) {
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-// Adding event listener to the QR form's button
+// Go back to the previous page
+function goBack() {
+    window.location.href = './index.html';
+}
+
+// Event Listeners
 qrForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
     generateQrCode();
 });
-
-// Adding event listener for command input
 commandInput.addEventListener('input', showSuggestions);
-
-// Initial Message
-createMessage('Welcome! Type a command like "/help" for options.', true);
-
-// send message on pressing send button(function)
-sendButton.addEventListener('click', () => {
-    executeCommand();
+sendButton.addEventListener('click', () => executeCommand());
+commandInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') executeCommand();
 });
 
-// send message on pressing enter key(even on mobile)
-commandInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        executeCommand();
-    }
-})
+// Initial message
+createMessage('Welcome! Type "/help" for commands.', true);
