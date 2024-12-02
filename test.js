@@ -222,7 +222,6 @@ function displayQrForm() {
 }
 
 // Generate a QR code
-// Generate a QR code
 function generateQrCode() {
     const qrCanvas = document.createElement('canvas');
     const qrValue = qrLink.value.trim();
@@ -233,40 +232,30 @@ function generateQrCode() {
         return;
     }
 
-    // Clear previous QR code and logo
-    qrFormDiv.innerHTML = '';
-    qrFormDiv.appendChild(qrCanvas);
+    QRCode.toCanvas(qrCanvas, qrValue, { width: 300, margin: 1 }, (error) => {
+        if (error) {
+            createMessage('Error generating QR code.', true);
+            return;
+        }
 
-    // Generate QR Code using a QR code library (like QRCode.js)
-    new QRCode(qrCanvas, {
-        text: qrValue,
-        width: 256,
-        height: 256,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-
-    // If logo URL is provided, add it to the center of the QR code
-    if (logoUrl) {
-        const logoImg = new Image();
-        logoImg.onload = function () {
+        if (logoUrl) {
             const ctx = qrCanvas.getContext('2d');
-            const logoSize = 50;
-            const x = (qrCanvas.width - logoSize) / 2;
-            const y = (qrCanvas.height - logoSize) / 2;
+            const logoImg = new Image();
 
-            // Draw the logo on the canvas
-            ctx.drawImage(logoImg, x, y, logoSize, logoSize);
-        };
-        logoImg.src = logoUrl;
-    }
+            logoImg.onload = () => {
+                const logoSize = qrCanvas.width * 0.2;
+                const x = (qrCanvas.width - logoSize) / 2;
+                const y = (qrCanvas.height - logoSize) / 2;
+                ctx.drawImage(logoImg, x, y, logoSize, logoSize);
+                displayQrCanvas(qrCanvas);
+            };
 
-    // Show the generated QR code
-    qrFormDiv.style.display = 'block';
-
-    // Reset the form after QR code generation
-    qrForm.reset();
+            logoImg.onerror = () => displayQrCanvas(qrCanvas);
+            logoImg.src = logoUrl;
+        } else {
+            displayQrCanvas(qrCanvas);
+        }
+    });
 }
 
 // Display QR code
@@ -296,4 +285,4 @@ commandInput.addEventListener('keydown', (event) => {
 });
 
 // Initial message
-createMessage('Welcome! Type "/help" for commands.', true);
+createMessage('Welcome! Type "/help" for commands.', true);(no additional changes)
