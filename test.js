@@ -225,6 +225,76 @@ function displayQrForm() {
     qrForm.focus();
 }
 
+// Function to generate a QR code
+function generateQrCode() {
+    const qrCanvas = document.createElement('canvas'); // Canvas for QR Code
+    const qrValue = qrLink.value.trim(); // Get the text or link from the input field
+    const logoUrl = qrLogo.value.trim(); // Get the logo URL from the input field
+
+    if (!qrValue) {
+        createMessage('Please provide a valid link or text for QR code.', true);
+        return;
+    }
+
+    // Use qrcode.js to generate the QR code
+    QRCode.toCanvas(qrCanvas, qrValue, { width: 300, margin: 1 }, async (error) => {
+        if (error) {
+            createMessage('Error generating QR code. Please try again.', true);
+            console.error(error);
+            return;
+        }
+
+        if (logoUrl) {
+            try {
+                // Add the logo to the QR code
+                const ctx = qrCanvas.getContext('2d');
+                const logoImg = new Image();
+
+                logoImg.onload = () => {
+                    const logoSize = qrCanvas.width * 0.2; // 20% of QR code size
+                    const logoX = (qrCanvas.width - logoSize) / 2; // Center horizontally
+                    const logoY = (qrCanvas.height - logoSize) / 2; // Center vertically
+
+                    ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+
+                    // Display the QR code with logo
+                    displayQrCanvas(qrCanvas);
+                };
+
+                logoImg.onerror = () => {
+                    createMessage('Error loading logo image. Displaying QR code without logo.', true);
+                    displayQrCanvas(qrCanvas);
+                };
+
+                logoImg.src = logoUrl;
+            } catch (logoError) {
+                createMessage('Error adding logo to QR code.', true);
+                console.error(logoError);
+                displayQrCanvas(qrCanvas);
+            }
+        } else {
+            // Display QR code without logo
+            displayQrCanvas(qrCanvas);
+        }
+    });
+}
+
+// Helper function to display the QR code
+function displayQrCanvas(canvas) {
+    qrFormDiv.style.display = 'none'; // Hide QR form
+    const qrOutput = document.createElement('div');
+    qrOutput.classList.add('qr-output');
+    qrOutput.appendChild(canvas);
+    messagesDiv.appendChild(qrOutput);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+// Adding event listener to the QR form's button
+qrForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevent default form submission
+    generateQrCode();
+});
+
 // Adding event listener for command input
 commandInput.addEventListener('input', showSuggestions);
 
