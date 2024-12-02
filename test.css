@@ -1,9 +1,10 @@
 :root {
     --bg-color: #ffffff;
     --text-color: #333333;
-    --card-bg: #f5f5f5;
-    --code-bg: #eaeaea;
-    --shadow-color: rgba(0,0,0,0.1);
+    --bot-msg-bg: #f0f0f0;
+    --user-msg-bg: #0055ff;
+    --user-msg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
     --gradient-start: #5865F2;
     --gradient-end: #404EED;
 }
@@ -11,9 +12,10 @@
 :root.dark-mode {
     --bg-color: #1a1a1a;
     --text-color: #ffffff;
-    --card-bg: #2d2d2d;
-    --code-bg: #363636;
-    --shadow-color: rgba(0,0,0,0.3);
+    --bot-msg-bg: #2d2d2d;
+    --user-msg-bg: #0055ff;
+    --user-msg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
     --gradient-start: #5865F2;
     --gradient-end: #404EED;
 }
@@ -29,14 +31,14 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     display: flex;
-    flex-direction: column; /* Allows footer to stay at the bottom */
-    min-height: 100vh; /* Ensures the body takes the full viewport height */
+    flex-direction: column;
+    min-height: 100vh;
     overflow-x: hidden;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .chat-container {
-    flex: 1; /* Allows this container to grow and push the footer down */
+    flex: 1;
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -46,6 +48,35 @@ body {
     flex: 1;
     overflow-y: auto;
     margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    box-shadow: 0px 0px 10px var(--shadow-color);
+}
+
+/* Scrollbar styling for Webkit browsers (Chrome, Safari) */
+.chat-box::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: var(--bg-color); /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: var(--gradient-start); /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+    background: var(--gradient-end); /* Color of the scrollbar thumb on hover */
+}
+
+/* Scrollbar styling for Firefox */
+.chat-box {
+    scrollbar-width: thin; /* Make the scrollbar thin */
+    scrollbar-color: var(--gradient-start) var(--bg-color); /* Thumb color and track color */
 }
 
 .input-area {
@@ -54,8 +85,8 @@ body {
 }
 
 input[type="text"] {
-    padding: 8px;
-    border: none;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 5px;
     background-color: var(--bg-color);
@@ -99,24 +130,44 @@ button:hover {
 }
 
 .message {
-    margin: 10px;
-    font-size: 16px;
+    margin: 10px 0;
+    display: flex;
+    align-items: flex-start; /* Align avatar and message to the start */
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .user-msg {
-    text-align: right;
-    color: #00b0f4;
+    background-color: var(--user-msg-bg);
+    color: var(--user-msg-color);
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 70%; /* Limit the width of user messages */
+    align-self: flex-end; /* Align user messages to the right */
+    position: relative;
+    box-shadow: 0px 2px 5px var(--shadow-color);
 }
 
 .bot-msg {
-    text-align: left;
-    color: #99aab5;
+    background-color: var(--bot-msg-bg);
+    color: var(--text-color);
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 70%; /* Limit the width of bot messages */
+    align-self: flex-start; /* Align bot messages to the left */
+    position: relative;
+    box-shadow: 0px 2px 5px var(--shadow-color);
 }
 
 #qrFormDiv {
     margin-top: 20px;
     padding: 15px;
-    background-color: var(--card-bg);
+    background-color: var(--bg-color);
     border: 1px solid #444;
     border-radius: 8px;
     display: none;
@@ -192,10 +243,10 @@ footer {
     background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
     color: white;
     padding: 1.5rem 1rem;
-    margin-top: auto; /* Ensures footer stays at the bottom */
-    width: 100%; /* Full width */
+    margin-top: auto;
+    width: 100%;
     text-align: center;
-    box-shadow: 0px -2px 10px var(--shadow-color); /* Add shadow for separation */
+    box-shadow: 0px -2px 10px var(--shadow-color);
     z-index: 10;
 }
 
@@ -203,7 +254,7 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-wrap: wrap; /* Wrap items on smaller screens */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -218,7 +269,7 @@ footer {
     flex: 1;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end; /* Align links to the right */
+    justify-content: flex-end;
     gap: 1rem;
 }
 
@@ -234,7 +285,7 @@ footer {
 }
 
 /* Responsive Footer */
-@media (max-width: 768px) {
+@media (max-width : 768px) {
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -248,4 +299,24 @@ footer {
     .footer-links {
         justify-content: center;
     }
+}
+
+/* Responsive Message Bubbles */
+@media (max-width: 480px) {
+    .user-msg, .bot-msg {
+        max-width: 90%; /* Increase width on smaller screens */
+    }
+}
+
+/* Autoscroll functionality */
+.chat-box {
+    overflow-y: auto; /* Ensure only the chatbox scrolls */
+}
+
+.chat-box .message:last-child {
+    scroll-margin-bottom: 10px; /* Add space at the bottom of the last message for better visibility */
+}
+
+.chat-box {
+    scroll-behavior: smooth; /* Smooth scrolling effect */
 }

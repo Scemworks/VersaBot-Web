@@ -26,12 +26,24 @@ const commandList = Object.keys(commands);
 function createMessage(content, isBot = true) {
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message');
-    msgDiv.classList.add(isBot ? 'bot-msg' : 'user-msg');
-    msgDiv.innerText = content;
+
+    const avatarImg = document.createElement('img');
+    avatarImg.src = isBot ? 'src/logo.jpeg' : 'src/user-avatar.png';
+    avatarImg.alt = isBot ? 'VersaBot' : 'User  ';
+    avatarImg.classList.add('avatar');
+
+    const textDiv = document.createElement('div');
+    textDiv.classList.add(isBot ? 'bot-msg' : 'user-msg');
+    textDiv.innerText = content;
+
+    msgDiv.appendChild(avatarImg);
+    msgDiv.appendChild(textDiv);
     messagesDiv.appendChild(msgDiv);
+
+    // Autoscroll to the bottom
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-    if (!isBot) sendRandomEmojiReply(); // Simulate a bot reply for non-commands
+    if (!isBot) sendRandomEmojiReply();
 }
 
 // Function to show suggestions
@@ -88,7 +100,7 @@ function executeCommand(command = commandInput.value.trim()) {
                 createMessage('Unknown command, try again!', true);
         }
     } else {
-        createMessage(storedMessage, true); // Send stored message for non-command input
+        createMessage(storedMessage, true);
     }
 
     commandInput.value = '';
@@ -99,7 +111,7 @@ function executeCommand(command = commandInput.value.trim()) {
 function handleQrCommand(command) {
     const qrArgs = command.split(' ').slice(1).join(' ');
     if (qrArgs) {
-        qrLink.value = qrArgs; // Set input field value to the argument
+        qrLink.value = qrArgs;
         generateQrCode();
     } else {
         displayQrForm();
@@ -130,7 +142,7 @@ Help: Available Commands
     createMessage(helpMessage, true);
 }
 
-// Roll a dice ```javascript
+// Roll a dice
 async function rollDice() {
     const dice = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
     createMessage('Rolling the dice...', true);
@@ -195,7 +207,7 @@ async function simulateTarot() {
         {"name": "The Chariot", "emoji": "🚀"},
         {"name": "Strength", "emoji": "💪"},
         {"name": "The Hermit", "emoji": "🧝"},
-        {"name": "Wheel of Fortune", "emoji": " 🎲"},
+        {"name": "Wheel of Fortune", "emoji": "🎲"},
         {"name": "Justice", "emoji": "⚔️"},
         {"name": "The Hanged Man", "emoji": "🏳️"},
         {"name": "Death", "emoji": "☠️"},
@@ -222,7 +234,7 @@ function displayQrForm() {
 }
 
 // Generate a QR code
-function generateQrCode () {
+function generateQrCode() {
     const qrCanvas = document.createElement('canvas');
     const qrValue = qrLink.value.trim();
     const logoUrl = qrLogo.value.trim();
@@ -265,7 +277,7 @@ function displayQrCanvas(canvas) {
     qrOutput.classList.add('qr-output');
     qrOutput.appendChild(canvas);
     messagesDiv.appendChild(qrOutput);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Autoscroll to the bottom
 }
 
 // Go back to the previous page
