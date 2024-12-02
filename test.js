@@ -130,7 +130,7 @@ Help: Available Commands
     createMessage(helpMessage, true);
 }
 
-// Roll a dice
+// Roll a dice ```javascript
 async function rollDice() {
     const dice = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
     createMessage('Rolling the dice...', true);
@@ -184,7 +184,7 @@ async function simulateFortune() {
 
 // Simulate a tarot card draw
 async function simulateTarot() {
-        const tarotCards = [
+    const tarotCards = [
         {"name": "The Fool", "emoji": "🤹"},
         {"name": "The Magician", "emoji": "🧙"},
         {"name": "The High Priestess", "emoji": "👸"},
@@ -222,7 +222,7 @@ function displayQrForm() {
 }
 
 // Generate a QR code
-function generateQrCode() {
+function generateQrCode () {
     const qrCanvas = document.createElement('canvas');
     const qrValue = qrLink.value.trim();
     const logoUrl = qrLogo.value.trim();
@@ -285,4 +285,4 @@ commandInput.addEventListener('keydown', (event) => {
 });
 
 // Initial message
-createMessage('Welcome! Type "/help" for commands.', true);(no additional changes)
+createMessage('Welcome! Type "/help" for commands.', true);
